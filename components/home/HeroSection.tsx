@@ -13,12 +13,11 @@ export default function HeroSection() {
       />
 
       {/* Right-aligned editorial overlay */}
-      <div className="absolute inset-0 flex flex-col items-end justify-center text-right px-8 md:px-16">
-
+      <div className="absolute inset-0 flex flex-col items-end justify-center text-right px-8 md:px-16 pointer-events-none">
 
         {/* Main serif italic headline */}
         <h1
-          className="text-[32px] md:text-[64px] leading-none font-black italic text-[#010526] mb-1 drop-shadow-sm"
+          className="text-[32px] md:text-[64px] leading-none font-black italic text-white mb-1 drop-shadow-sm mix-blend-difference"
           style={{ fontFamily: "var(--font-pt-serif)" }}
         >
           IndiNest
@@ -26,20 +25,22 @@ export default function HeroSection() {
 
         {/* Script subtitle */}
         <p
-          className="text-2xl md:text-xl text-[#010526] mb-3"
+          className="text-2xl md:text-xl text-white mb-3 mix-blend-difference"
           style={{ fontFamily: "var(--font-pt-serif)" }}
         >
           Premium Indian Fashion
         </p>
 
         {/* CTA */}
-        <Button
-          href="#"
-          variant="secondary"
-          className="mt-6 tracking-[0.2em] px-7 py-3"
-        >
-          Discover the Collection
-        </Button>
+        <div className="pointer-events-auto">
+          <Button
+            href="#"
+            variant="secondary"
+            className="mt-6 tracking-[0.2em] px-7 py-3 mix-blend-difference !text-white !border-white hover:!bg-white hover:!text-black transition-all"
+          >
+            Discover the Collection
+          </Button>
+        </div>
 
       </div>
     </section>
