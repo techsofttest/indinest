@@ -95,7 +95,7 @@ export default function Header() {
                 height={58}
                 priority
                 className="object-contain"
-                style={{ width: "auto", height: "auto" }}
+                style={{ maxWidth: "160px", maxHeight: "58px", width: "100%", height: "auto" }}
               />
             </div>
           </div>
