@@ -17,7 +17,7 @@ export default function HeroSection() {
 
         {/* Main serif italic headline */}
         <h1
-          className="text-[32px] md:text-[64px] leading-none font-black italic text-white mb-1 drop-shadow-sm mix-blend-difference"
+          className="text-[32px] md:text-[64px] leading-none font-black italic text-[#fefad7] mb-1 drop-shadow-sm mix-blend-difference"
           style={{ fontFamily: "var(--font-pt-serif)" }}
         >
           IndiNest
@@ -25,7 +25,7 @@ export default function HeroSection() {
 
         {/* Script subtitle */}
         <p
-          className="text-2xl md:text-xl text-white mb-3 mix-blend-difference"
+          className="text-2xl md:text-xl text-[#fefad7] mb-3 mix-blend-difference"
           style={{ fontFamily: "var(--font-pt-serif)" }}
         >
           Premium Indian Fashion
@@ -36,7 +36,7 @@ export default function HeroSection() {
           <Button
             href="#"
             variant="secondary"
-            className="mt-6 tracking-[0.2em] px-7 py-3 mix-blend-difference !text-white !border-white hover:!bg-white hover:!text-black transition-all"
+            className="mt-6 tracking-[0.2em] px-7 py-3 mix-blend-difference !text-[#fefad7] !border-[#fefad7] hover:!bg-[#fefad7] hover:!text-black transition-all"
           >
             Discover the Collection
           </Button>
