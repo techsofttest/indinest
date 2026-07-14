@@ -12,8 +12,8 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-[105%] object-cover object-top"
       />
 
-      {/* Right-aligned editorial overlay with a soft right-side light gradient for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-l from-white/50 via-white/15 to-transparent flex flex-col items-end justify-center text-right px-8 md:px-16 pointer-events-none">
+      {/* Right-aligned editorial overlay with a soft right-side brand-colored light gradient for legibility */}
+      <div className="absolute inset-0 bg-gradient-to-l from-[#F0F2FF]/60 via-[#F0F2FF]/20 to-transparent flex flex-col items-end justify-center text-right px-8 md:px-16 pointer-events-none">
 
         {/* Main serif italic headline */}
         <h1
