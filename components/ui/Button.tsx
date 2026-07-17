@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 interface BaseButtonProps {
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "tertiary" | "white";
   size?: "sm" | "md" | "lg";
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
@@ -42,6 +42,7 @@ export default function Button({
     primary: "bg-[#010526] text-white border border-[#010526] hover:bg-[#010526]/90",
     secondary: "border border-[#010526] text-[#010526] hover:bg-[#010526] hover:text-white bg-transparent",
     tertiary: "text-[#010526] hover:opacity-70 bg-transparent border-none p-0",
+    white: "border border-white text-white hover:bg-white hover:text-[#010526] bg-transparent",
   };
 
   const sizeStyles = {

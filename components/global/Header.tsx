@@ -3,17 +3,21 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SearchModal from "./SearchModal";
+import MenuDropdown from "./MenuDropdown";
 
 // Left-side nav links
-const leftLinks = [
+export const leftLinks = [
   { label: "Shop", href: "#" },
   { label: "New Arrival", href: "#" },
   { label: "Kerala Traditional", href: "#" },
 ];
 
 // Right-side nav links
-const rightLinks = [
-  { label: "Sale", href: "#" },
+export const rightLinks = [
+  { label: "Men", href: "#" },
+  { label: "Women", href: "#" },
+  { label: "Kids", href: "#" },
+  { label: "Best Sellers", href: "#" },
   { label: "Blog", href: "#" },
 ];
 
@@ -23,6 +27,31 @@ const categories = [
   { label: "Salwar Suits", href: "#" },
   { label: "Silk Weaves", href: "#" },
   { label: "Designer Jewellery", href: "#" },
+];
+
+export const drawerCategories = [
+  { name: "Sarees", image: "/category/sarees.png", href: "#" },
+  { name: "Readymade Blouses", image: "/category/blouses2.png", href: "#" },
+  { name: "Jewellery", image: "/category/jewellery.png", href: "#" },
+  { name: "Kaftans", image: "/category/kaftan2.png", href: "#" },
+  { name: "Salwar Suits", image: "/category/salvar.png", href: "#" },
+  { name: "Kurtas", image: "/category/kurtas.png", href: "#" },
+  { name: "Kids' Wear", image: "/banner/kids_category.png", href: "#" },
+  { name: "Men's Wear", image: "/banner/men_category.png", href: "#" },
+];
+
+export const keralaTraditionalItems = [
+  { label: "Kerala Saree", href: "#" },
+  { label: "120 Mul Cotton Saree", href: "#" },
+  { label: "Premium Silk Sarees", href: "#" },
+  { label: "Party Wear Sarees", href: "#" },
+  { label: "Readymade Blouse", href: "#" },
+  { label: "Jewellery", href: "#" },
+  { label: "Kaftan", href: "#" },
+  { label: "Salwar", href: "#" },
+  { label: "Kurta", href: "#" },
+  { label: "Co-ord Set", href: "#" },
+  { label: "Dhavani Set", href: "#" },
 ];
 
 export default function Header() {
@@ -64,15 +93,45 @@ export default function Header() {
 
             {/* Left nav links — hidden on mobile */}
             <nav className="hidden md:flex items-center gap-7 text-[11px] font-semibold uppercase tracking-widest">
-              {leftLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="relative text-[#010526] hover:opacity-60 transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {leftLinks.map((link) => {
+                if (link.label === "Kerala Traditional") {
+                  return (
+                    <div key={link.label} className="relative group py-2">
+                      <button className="flex items-center gap-1.5 text-[#010526] hover:opacity-60 transition-opacity uppercase tracking-widest font-semibold text-[11px]">
+                        {link.label}
+                        <svg className="w-2.5 h-2.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute left-0 mt-2 w-60 bg-white border border-[#010526]/10 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 py-2.5">
+                        {keralaTraditionalItems.map((item) => (
+                          <a
+                            key={item.label}
+                            href={item.href}
+                            className="flex items-center justify-between px-5 py-2.5 text-[12px] text-[#010526] hover:bg-[#010526]/5 transition-all tracking-wider uppercase font-semibold group/item"
+                          >
+                            <span>{item.label}</span>
+                            <span className="opacity-0 -translate-x-1.5 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 text-[#010526]/60 font-normal">
+                              &rarr;
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="relative text-[#010526] hover:opacity-60 transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full"
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
             </nav>
           </div>
 
@@ -151,61 +210,10 @@ export default function Header() {
               </button>
             </div>
           </div>
-
         </div>
         <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      </header>
-
-      {/* ── MOBILE MENU DRAWER ── */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-300 ${menuOpen ? "pointer-events-auto" : "pointer-events-none"
-          }`}
-      >
-        {/* Backdrop */}
-        <div
-          className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${menuOpen ? "opacity-100" : "opacity-0"
-            }`}
-          onClick={() => setMenuOpen(false)}
-        />
-
-        {/* Drawer */}
-        <nav
-          className={`absolute top-0 left-0 h-full w-64 bg-white shadow-xl flex flex-col pt-20 px-8 overflow-y-auto gap-6 text-[12px] font-semibold uppercase tracking-widest transition-transform duration-300 ease-out ${menuOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
-        >
-          <div className="flex flex-col gap-5">
-            {[...leftLinks, ...rightLinks].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="hover:opacity-60 transition-opacity text-[#010526]"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <hr className="border-[#010526]/10" />
-
-          {/* Categories Section */}
-          <div className="flex flex-col gap-4">
-            <span className="text-[10px] text-[#010526]/50 tracking-[0.2em] font-bold">Categories</span>
-            <div className="flex flex-col gap-4 pl-2 normal-case font-normal text-sm text-[#010526]/85">
-              {categories.map((cat) => (
-                <a
-                  key={cat.label}
-                  href={cat.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="hover:opacity-60 transition-opacity whitespace-nowrap"
-                >
-                  {cat.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </nav>
-      </div>
+        <MenuDropdown isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      </header >
     </>
   );
 }

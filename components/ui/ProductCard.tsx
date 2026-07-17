@@ -15,7 +15,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <div className="flex-none w-[220px] md:w-[280px] snap-start group cursor-pointer">
-      <div className={`w-full aspect-[3/4] ${bgColor} mb-3 relative overflow-hidden`}>
+      <div className={`w-full aspect-[2/3] ${bgColor} mb-3 relative overflow-hidden`}>
         {/* Add to Cart button - visible on hover */}
         <button
           className="absolute top-3 right-3 p-2.5 rounded-full bg-white/90 text-[#010526] z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md hover:bg-white hover:scale-105"

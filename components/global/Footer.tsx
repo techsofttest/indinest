@@ -113,14 +113,15 @@ export default function Footer() {
         <div className="bg-[#F0F2FF] p-6 flex items-start gap-4 text-left">
           <div className="text-[#010526] flex-shrink-0 pt-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-              <path d="M3 3v5h5" />
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold text-[#010526] mb-1">Easy returns</span>
+            <span className="text-sm font-semibold text-[#010526] mb-1">No Returns or Refunds</span>
             <span className="text-xs text-[#010526]/70 leading-normal">
-              Return within 15 days of order delivery. <span className="underline cursor-pointer">See T&Cs</span>
+              All sales are final. Please review product details.
             </span>
           </div>
         </div>
@@ -136,9 +137,9 @@ export default function Footer() {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold text-[#010526] mb-1">We ship worldwide</span>
+            <span className="text-sm font-semibold text-[#010526] mb-1">Shipping Regions</span>
             <span className="text-xs text-[#010526]/70 leading-normal">
-              visit <span className="underline cursor-pointer">global.indinest.com</span>
+              We ship across the UK, Ireland & Germany
             </span>
           </div>
         </div>
@@ -153,9 +154,10 @@ export default function Footer() {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold text-[#010526] mb-1">Free shipping</span>
+            <span className="text-sm font-semibold text-[#010526] mb-1">Delivery Rates</span>
             <span className="text-xs text-[#010526]/70 leading-normal">
-              Free shipping on orders above ₹ 1,000
+              Standard UK: £4.45 <br />
+              Express: £5.95 <span className="line-through opacity-50 ml-1">£9.95</span>
             </span>
           </div>
         </div>
@@ -164,15 +166,14 @@ export default function Footer() {
         <div className="bg-[#F0F2FF] p-6 flex items-start gap-4 text-left">
           <div className="text-[#010526] flex-shrink-0 pt-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-              <rect width="20" height="12" x="2" y="6" rx="2" />
-              <circle cx="12" cy="12" r="2" />
-              <path d="M6 12h.01M18 12h.01" />
+              <rect width="22" height="16" x="2" y="4" rx="2" />
+              <line x1="2" y1="10" x2="22" y2="10" />
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold text-[#010526] mb-1">Cash on delivery</span>
+            <span className="text-sm font-semibold text-[#010526] mb-1">No Cash on Delivery</span>
             <span className="text-xs text-[#010526]/70 leading-normal">
-              COD available
+              Secure online payment methods only
             </span>
           </div>
         </div>
@@ -235,10 +236,13 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h5 className="font-bold uppercase tracking-widest text-[10px] mb-2">Categories</h5>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Sarees</a>
-          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Silk Weaves</a>
-          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Lehengas</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Readymade Blouses</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Jewellery</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Kaftans</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Salwar Suits</a>
-          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Designer Jewellery</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Kurtas</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Kids' Wear</a>
+          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Men's Wear</a>
         </div>
       </div>
 

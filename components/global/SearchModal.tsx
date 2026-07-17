@@ -16,13 +16,13 @@ const trendingSuggestions = [
 ];
 
 const searchDatabase = [
-  { name: "Kerala Traditional Kasavu Saree", category: "Sarees", price: "₹ 14,500", image: "/products/editorial/ed1.jpg" },
-  { name: "Heritage Banarasi Silk Saree", category: "Sarees", price: "₹ 24,000", image: "/products/editorial/ed2.jpg" },
-  { name: "Kanjivaram Silk Saree", category: "Sarees", price: "₹ 21,200", image: "/products/cloth/cloth.jpg" },
-  { name: "Chanderi Cotton Saree", category: "Sarees", price: "₹ 8,900", image: "/products/cloth/ChatGPT Image Jul 14, 2026, 10_28_54 AM 1.jpg" },
-  { name: "Kundan Temple Art Jewellery Set", category: "Jewellery", price: "₹ 8,500", image: "/products/jewellery/necklace.jpg" },
-  { name: "Designer Bridal Lehenga", category: "Lehengas", price: "₹ 38,000", image: "/products/cloth/look1.png" },
-  { name: "Elegant Georgette Anarkali Suit", category: "Salwar Suits", price: "₹ 12,000", image: "/products/cloth/look3.png" },
+  { name: "Kerala Traditional Kasavu Saree", category: "Sarees", price: "£ 14,500", image: "/products/editorial/ed1.jpg" },
+  { name: "Heritage Banarasi Silk Saree", category: "Sarees", price: "£ 24,000", image: "/products/editorial/ed2.jpg" },
+  { name: "Kanjivaram Silk Saree", category: "Sarees", price: "£ 21,200", image: "/products/cloth/cloth.jpg" },
+  { name: "Chanderi Cotton Saree", category: "Sarees", price: "£ 8,900", image: "/products/cloth/ChatGPT Image Jul 14, 2026, 10_28_54 AM 1.jpg" },
+  { name: "Kundan Temple Art Jewellery Set", category: "Jewellery", price: "£ 8,500", image: "/products/jewellery/necklace.jpg" },
+  { name: "Designer Bridal Lehenga", category: "Lehengas", price: "£ 38,000", image: "/products/cloth/look1.png" },
+  { name: "Elegant Georgette Anarkali Suit", category: "Salwar Suits", price: "£ 12,000", image: "/products/cloth/look3.png" },
 ];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {

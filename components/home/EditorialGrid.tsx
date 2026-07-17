@@ -3,10 +3,10 @@ import Button from "@/components/ui/Button";
 const editorialItems = [
   {
     id: 1,
-    imageSrc: "/products/editorial/ed1.jpg",
-    imageAlt: "Kerala Kasavu Saree",
-    label: "Kerala Traditional",
-    description: "The timeless gold-and-white Kasavu weave",
+    imageSrc: "/products/editorial/men_kurta2.png",
+    imageAlt: "Men's Heritage Kurta",
+    label: "Men's Editorial",
+    description: "Contemporary design meets classical tailoring",
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ export default function EditorialGrid() {
                 alt={item.imageAlt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              
+
               {/* Bottom text and CTA overlay inside the card */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-10 text-left">
                 <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2 text-white/80">
