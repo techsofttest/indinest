@@ -179,12 +179,12 @@ export default function FinestEditCarousel() {
       </div>
 
       {/* Line progress indicator */}
-      <div className="mt-5 w-full h-[1px] bg-[#010526]/15 relative overflow-hidden rounded-full">
+      {/* <div className="mt-5 w-full h-[1px] bg-[#010526]/15 relative overflow-hidden rounded-full">
         <div
           className="absolute top-0 left-0 h-full bg-[#010526] rounded-full transition-none"
           style={{ width: `${progress * 100}%` }}
         />
-      </div>
+      </div> */}
     </section>
   );
 }

@@ -26,7 +26,7 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
+    <section className="relative w-full overflow-hidden bg-white py-12 md:py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
       {/* Title / Header */}
       <div className="text-center mb-12">
         <p className="text-[10px] uppercase tracking-[0.2em] mb-2 text-[#010526]/60">Explore Collections</p>

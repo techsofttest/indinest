@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 
 export default function FeaturedSareeShowcase() {
   return (
-    <section className="w-full bg-[#F0F2FF] py-16 px-4 md:px-8">
+    <section className="w-full bg-[#F0F2FF] py-12 md:py-16 px-4 md:px-8">
       <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
         {/* Left Grid: Product Angle Collage */}

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full max-w-[1600px] mx-auto pt-20 pb-8 px-4 md:px-8">
+    <footer className="w-full max-w-[1600px] mx-auto pt-8 pb-8 px-4 md:px-8">
 
       {/* Premium CTA Banner */}
       <div className="w-full max-w-[1600px] mx-auto bg-[#F0F2FF] py-16 px-6 md:px-24 mb-4 flex flex-col items-center justify-center overflow-hidden relative min-h-[240px]">

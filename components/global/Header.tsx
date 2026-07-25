@@ -1,23 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import SearchModal from "./SearchModal";
 import MenuDropdown from "./MenuDropdown";
 
 // Left-side nav links
 export const leftLinks = [
   { label: "Shop", href: "#" },
-  { label: "New Arrival", href: "#" },
+  { label: "New Arrival", href: "/products/new-arrivals" },
   { label: "Kerala Traditional", href: "#" },
 ];
 
 // Right-side nav links
 export const rightLinks = [
-  { label: "Men", href: "#" },
-  { label: "Women", href: "#" },
+  { label: "Men", href: "/products/men" },
+  { label: "Women", href: "/products/women" },
   { label: "Kids", href: "#" },
-  { label: "Best Sellers", href: "#" },
+  { label: "Best Sellers", href: "/products/best-sellers" },
   { label: "Blog", href: "#" },
 ];
 
@@ -55,6 +57,7 @@ export const keralaTraditionalItems = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [revealed, setRevealed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -137,41 +140,50 @@ export default function Header() {
 
           {/* ── CENTER: Logo with reveal animation ── */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <div
-              className="transition-all duration-1000 ease-out"
-              style={{
-                opacity: revealed ? 1 : 0,
-                transform: revealed
-                  ? "translateY(0) scale(1)"
-                  : "translateY(-14px) scale(0.88)",
-                filter: revealed ? "blur(0px)" : "blur(5px)",
-              }}
-            >
-              <Image
-                src="/logo/logo.png"
-                alt="IndiNest"
-                width={160}
-                height={58}
-                priority
-                className="object-contain"
-                style={{ maxWidth: "160px", maxHeight: "58px", width: "100%", height: "auto" }}
-              />
-            </div>
+            <Link href="/" className="block">
+              <div
+                className="transition-all duration-1000 ease-out"
+                style={{
+                  opacity: revealed ? 1 : 0,
+                  transform: revealed
+                    ? "translateY(0) scale(1)"
+                    : "translateY(-14px) scale(0.88)",
+                  filter: revealed ? "blur(0px)" : "blur(5px)",
+                }}
+              >
+                <Image
+                  src="/logo/logo.png"
+                  alt="IndiNest"
+                  width={160}
+                  height={58}
+                  priority
+                  className="object-contain"
+                  style={{ maxWidth: "160px", maxHeight: "58px", width: "100%", height: "auto" }}
+                />
+              </div>
+            </Link>
           </div>
 
           {/* ── RIGHT: nav links + icons ── */}
           <div className="flex items-center gap-5">
             {/* Right nav links — hidden on mobile */}
             <nav className="hidden md:flex items-center gap-7 text-[11px] font-semibold uppercase tracking-widest">
-              {rightLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="relative transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full hover:opacity-60 text-[#010526]"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {rightLinks.map((link) => {
+                const isActive = link.href !== "#" && pathname.startsWith(link.href);
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className={`relative transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full text-[#010526] ${
+                      isActive
+                        ? "after:w-full opacity-100"
+                        : "after:w-0 hover:opacity-60"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Icon group */}

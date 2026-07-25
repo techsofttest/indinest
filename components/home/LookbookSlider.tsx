@@ -4,21 +4,23 @@ import { useState } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 
+interface SlideItem {
+  id: number;
+  imageSrc: string;
+  imageAlt: string;
+  name: string;
+  category: string;
+}
+
 interface SlideData {
   id: number;
   modelImage: string;
   modelAlt: string;
   title: string;
-  items: {
-    id: number;
-    imageSrc: string;
-    imageAlt: string;
-    name: string;
-    category: string;
-  }[];
+  items: SlideItem[];
 }
 
-const slides: SlideData[] = [
+const defaultSlides: SlideData[] = [
   {
     id: 1,
     modelImage: "/products/lookbook/look1/look1.png",
@@ -129,7 +131,11 @@ const slides: SlideData[] = [
   },
 ];
 
-export default function LookbookSlider() {
+interface LookbookSliderProps {
+  slides?: SlideData[];
+}
+
+export default function LookbookSlider({ slides = defaultSlides }: LookbookSliderProps) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const handlePrev = () => {
@@ -142,27 +148,29 @@ export default function LookbookSlider() {
 
   const currentSlide = slides[currentSlideIndex];
 
+  if (!currentSlide) return null;
+
   return (
-    <section className="relative w-full py-10 px-4 md:px-8 bg-white">
+    <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-white">
       {/* Navigation Arrows */}
       <button
         onClick={handlePrev}
         aria-label="Previous Look"
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center border border-[#010526]/20 bg-white/80 hover:bg-white text-[#010526] transition-colors"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white text-[#010526] transition-colors shadow-md"
       >
         &larr;
       </button>
       <button
         onClick={handleNext}
         aria-label="Next Look"
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center border border-[#010526]/20 bg-white/80 hover:bg-white text-[#010526] transition-colors"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white text-[#010526] transition-colors shadow-md"
       >
         &rarr;
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center max-w-[1600px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch max-w-[1600px] mx-auto">
         {/* Left Side: Large image of the look/model */}
-        <div className="relative aspect-[4/5] w-full max-h-[500px] bg-[#f8f8f8] overflow-hidden group">
+        <div className="relative w-full min-h-[450px] md:h-full bg-[#f8f8f8] overflow-hidden group">
           <Image
             src={currentSlide.modelImage}
             alt={currentSlide.modelAlt}
@@ -202,10 +210,10 @@ export default function LookbookSlider() {
                     style={{ width: "auto", height: "auto" }}
                   />
                 </div>
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#010526] mb-0.5">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#010526] mb-1">
                   {item.name}
                 </h4>
-                <p className="text-[9px] uppercase tracking-widest text-[#010526]/50">
+                <p className="text-[11px] uppercase tracking-wider text-[#010526]/70">
                   {item.category}
                 </p>
               </div>

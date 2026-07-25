@@ -26,6 +26,15 @@ const searchDatabase = [
 ];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
+  const [shouldRender, setShouldRender] = useState(isOpen);
+  const [animate, setAnimate] = useState(false);
+
+  useState(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    }
+  });
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
 
@@ -38,18 +47,27 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     };
     if (isOpen) {
       window.addEventListener("keydown", handleKeyDown);
-      // Disable background scrolling
-      document.body.style.overflow = "hidden";
       // Focus input
       setTimeout(() => inputRef.current?.focus(), 100);
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      const timer = setTimeout(() => setAnimate(true), 10);
+      return () => clearTimeout(timer);
+    } else {
+      setAnimate(false);
+      const timer = setTimeout(() => setShouldRender(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  if (!shouldRender) return null;
 
   // Filter items in the search database based on typing query
   const filteredProducts = query.trim()
@@ -79,11 +97,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       {/* Dark backdrop below header level (since SearchModal sits inside Header container) */}
       <div
         onClick={onClose}
-        className="fixed inset-0 top-[96px] bg-black/35 backdrop-blur-xs z-40 transition-opacity duration-300"
+        className={`fixed inset-0 top-[96px] bg-black/35 backdrop-blur-xs z-40 transition-opacity duration-300 ${
+          animate ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
       />
 
       {/* Dropdown panel just below the navbar */}
-      <div className="absolute top-full left-0 w-full min-h-[480px] bg-white border-b border-[#010526]/10 shadow-2xl py-10 px-6 md:px-16 z-50 animate-in slide-in-from-top-4 duration-300 ease-out flex flex-col gap-8">
+      <div className={`absolute top-full left-0 w-full min-h-[480px] bg-white border-b border-[#010526]/10 shadow-2xl py-10 px-6 md:px-16 z-50 transition-all duration-300 ease-out flex flex-col gap-8 ${
+        animate ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+      }`}>
 
         {/* Absolute Close button in top-right to avoid confusion */}
         <button

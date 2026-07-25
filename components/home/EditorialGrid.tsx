@@ -31,11 +31,23 @@ const editorialItems = [
   },
 ];
 
-export default function EditorialGrid() {
+interface EditorialItem {
+  id: number;
+  imageSrc: string;
+  imageAlt: string;
+  label: string;
+  description: string;
+}
+
+interface EditorialGridProps {
+  items?: EditorialItem[];
+}
+
+export default function EditorialGrid({ items = editorialItems }: EditorialGridProps) {
   return (
-    <section className="py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
+    <section className="py-12 md:py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-        {editorialItems.map((item) => (
+        {items.map((item) => (
           <div
             key={item.id}
             className="flex flex-col cursor-pointer group"
@@ -57,8 +69,9 @@ export default function EditorialGrid() {
                   {item.description}
                 </p>
                 <Button
-                  variant="tertiary"
-                  className="!text-white underline underline-offset-4 self-start text-[10px] font-bold tracking-[0.2em] uppercase transition-all"
+                  variant="white"
+                  size="sm"
+                  className="self-start text-[10px] font-bold tracking-[0.2em] uppercase"
                 >
                   Shop Now
                 </Button>

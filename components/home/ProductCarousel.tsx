@@ -9,117 +9,171 @@ const heritageProducts = [
     id: 10,
     imageSrc: "/products/product-clt/120 Mul Cotton Saree.png",
     imageAlt: "120 Mul Cotton Saree",
-    brand: "Mul Cotton Saree",
+    brand: "Mulmul Heritage",
+    name: "120 Mul Cotton Saree",
     price: "£ 4,500",
+    originalPrice: "£ 5,500",
   },
   {
     id: 11,
     imageSrc: "/products/product-clt/Party Wear Saree.png",
     imageAlt: "Party Wear Saree",
-    brand: "Designer Party Saree",
+    brand: "Regal Weaves",
+    name: "Party Wear Saree",
     price: "£ 18,900",
+    originalPrice: null,
   },
   {
     id: 12,
     imageSrc: "/products/product-clt/Salwar.png",
     imageAlt: "Salwar Suit",
-    brand: "Ethnic Salwar Suit",
+    brand: "Artisan Loom",
+    name: "Ethnic Salwar Suit",
     price: "£ 6,500",
+    originalPrice: "£ 7,800",
   },
   {
     id: 13,
     imageSrc: "/products/product-clt/Salwar2.png",
     imageAlt: "Designer Salwar Suit",
-    brand: "Chic Salwar Suit",
+    brand: "Artisan Loom",
+    name: "Chic Salwar Suit",
     price: "£ 7,200",
+    originalPrice: null,
   },
   {
     id: 14,
     imageSrc: "/products/product-clt/Saree-blk.png",
     imageAlt: "Black Saree",
-    brand: "Classic Black Saree",
+    brand: "Royal Crafts",
+    name: "Classic Black Saree",
     price: "£ 12,800",
+    originalPrice: "£ 15,500",
   },
   {
     id: 15,
     imageSrc: "/products/product-clt/Saree-blue-green.png",
     imageAlt: "Blue-Green Saree",
-    brand: "Silk Saree",
+    brand: "Regal Weaves",
+    name: "Silk Saree",
     price: "£ 16,500",
+    originalPrice: null,
   },
   {
     id: 16,
     imageSrc: "/products/product-clt/Saree-red.png",
     imageAlt: "Red Saree",
-    brand: "Elegant Red Saree",
+    brand: "Royal Crafts",
+    name: "Elegant Red Saree",
     price: "£ 19,500",
+    originalPrice: "£ 24,000",
   },
   {
     id: 1,
     imageSrc: "/products/cloth/ChatGPT Image Jul 14, 2026, 10_28_54 AM 1.jpg",
     imageAlt: "Traditional Indian Outfit",
-    brand: "Traditional Indian Outfit",
+    brand: "North Craft",
+    name: "Traditional Indian Outfit",
     price: "£ 14,500",
+    originalPrice: null,
   },
   {
     id: 2,
     imageSrc: "/products/cloth/ChatGPT Image Jul 14, 2026, 10_31_20 AM 1.jpg",
     imageAlt: "Heritage Saree",
-    brand: "Heritage Saree",
+    brand: "Royal Crafts",
+    name: "Heritage Saree",
     price: "£ 34,900",
+    originalPrice: "£ 42,000",
   },
   {
     id: 3,
     imageSrc: "/products/jewellery/earing.jpg",
     imageAlt: "Heritage Earrings",
-    brand: "Heritage Earrings",
+    brand: "Kundan Arts",
+    name: "Heritage Earrings",
     price: "£ 9,800",
+    originalPrice: null,
   },
   {
     id: 4,
     imageSrc: "/products/cloth/ChatGPT Image Jul 14, 2026, 10_36_40 AM 1.jpg",
     imageAlt: "Designer Saree",
-    brand: "Designer Saree",
+    brand: "Regal Weaves",
+    name: "Designer Saree",
     price: "£ 28,500",
+    originalPrice: "£ 35,000",
   },
   {
     id: 5,
     imageSrc: "/products/cloth/ed1.jpg",
     imageAlt: "Ethnic Outfit",
-    brand: "Ethnic Outfit",
+    brand: "North Craft",
+    name: "Ethnic Outfit",
     price: "£ 18,900",
+    originalPrice: null,
   },
   {
     id: 6,
     imageSrc: "/products/jewellery/ring.jpg",
     imageAlt: "Gold Ring",
-    brand: "Gold Ring",
+    brand: "Kundan Arts",
+    name: "Gold Ring",
     price: "£ 12,000",
+    originalPrice: "£ 14,500",
   },
   {
     id: 7,
     imageSrc: "/products/cloth/ed2.jpg",
     imageAlt: "Festive Wear",
-    brand: "Festive Wear",
+    brand: "Royal Crafts",
+    name: "Festive Wear",
     price: "£ 22,000",
+    originalPrice: null,
   },
   {
     id: 8,
     imageSrc: "/products/jewellery/necklace.jpg",
     imageAlt: "Gold Necklace",
-    brand: "Gold Necklace",
+    brand: "Kundan Arts",
+    name: "Gold Necklace",
     price: "£ 48,000",
+    originalPrice: "£ 55,000",
   },
   {
     id: 9,
     imageSrc: "/products/jewellery/bangle.jpg",
     imageAlt: "Gold Bangle",
-    brand: "Gold Bangle",
+    brand: "Kundan Arts",
+    name: "Gold Bangle",
     price: "£ 18,500",
+    originalPrice: null,
   },
 ];
 
-export default function HeritageCarousel() {
+
+interface ProductCarouselProps {
+  products?: {
+    id: number;
+    imageSrc: string;
+    imageAlt: string;
+    brand: string;
+    name: string;
+    price: string;
+    originalPrice: string | null;
+    sizes?: string[];
+  }[];
+  title?: string;
+  subtitle?: string;
+  showSeeAll?: boolean;
+}
+
+export default function HeritageCarousel({
+  products = heritageProducts,
+  title = "New Styles from the Heritage Collection",
+  subtitle = "Sale Last Call • Extra 20% Off",
+  showSeeAll = true,
+}: ProductCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   // Drag state
@@ -148,7 +202,7 @@ export default function HeritageCarousel() {
     el.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress(); // initialise
     return () => el.removeEventListener("scroll", updateProgress);
-  }, [updateProgress]);
+  }, [updateProgress, products]);
 
   /* ── Momentum helper ── */
   const applyMomentum = () => {
@@ -224,25 +278,29 @@ export default function HeritageCarousel() {
   };
 
   return (
-    <section className="py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
+    <section className="py-12 md:py-16 px-4 md:px-8 max-w-[1600px] mx-auto">
       {/* Section header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
         <div>
-          <p className="text-[10px] uppercase tracking-widest mb-2 text-[#010526]/60">
-            Sale Last Call &bull; Extra 20% Off
-          </p>
+          {subtitle && (
+            <p className="text-[10px] uppercase tracking-widest mb-2 text-[#010526]/60">
+              {subtitle}
+            </p>
+          )}
           <h2 className="text-xl md:text-2xl font-bold text-[#010526]">
-            New Styles from the Heritage Collection
+            {title}
           </h2>
         </div>
-        <Button
-          href="#"
-          variant="secondary"
-          size="sm"
-          className="whitespace-nowrap"
-        >
-          See all
-        </Button>
+        {showSeeAll && (
+          <Button
+            href="#"
+            variant="secondary"
+            size="sm"
+            className="whitespace-nowrap"
+          >
+            See all
+          </Button>
+        )}
       </div>
 
       {/* Relative wrapper containing carousel track and navigation arrows */}
@@ -278,19 +336,19 @@ export default function HeritageCarousel() {
           style={{ cursor: dragging ? "grabbing" : "grab" }}
           className="flex gap-5 overflow-x-auto pb-6 no-scrollbar select-none"
         >
-          {heritageProducts.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
       </div>
 
       {/* Line progress indicator */}
-      <div className="mt-5 w-full h-[1px] bg-[#010526]/15 relative overflow-hidden rounded-full">
+      {/* <div className="mt-5 w-full h-[1px] bg-[#010526]/15 relative overflow-hidden rounded-full">
         <div
           className="absolute top-0 left-0 h-full bg-[#010526] rounded-full transition-none"
           style={{ width: `${progress * 100}%` }}
         />
-      </div>
+      </div> */}
     </section>
   );
 }

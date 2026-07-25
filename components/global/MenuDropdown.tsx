@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { leftLinks, rightLinks, drawerCategories, keralaTraditionalItems } from "./Header";
 
 interface MenuDropdownProps {
@@ -9,20 +9,43 @@ interface MenuDropdownProps {
 }
 
 export default function MenuDropdown({ isOpen, onClose }: MenuDropdownProps) {
+  const [shouldRender, setShouldRender] = useState(isOpen);
+  const [animate, setAnimate] = useState(false);
+
+  useState(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    }
+  });
+
   const [keralaOpen, setKeralaOpen] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      const timer = setTimeout(() => setAnimate(true), 10);
+      return () => clearTimeout(timer);
+    } else {
+      setAnimate(false);
+      const timer = setTimeout(() => setShouldRender(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  if (!shouldRender) return null;
 
   return (
     <>
       {/* Backdrop below header */}
       <div
         onClick={onClose}
-        className="fixed inset-0 top-[96px] bg-black/35 backdrop-blur-xs z-40 transition-opacity duration-300"
+        className={`fixed inset-0 top-[96px] bg-black/35 backdrop-blur-xs z-40 transition-opacity duration-300 ${animate ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       />
 
       {/* Panel just below the navbar */}
-      <div className="absolute top-full left-0 w-full min-h-[380px] bg-white border-b border-[#010526]/10 shadow-2xl py-10 px-6 md:px-16 z-50 animate-in slide-in-from-top-4 duration-300 ease-out grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 max-w-full text-left">
+      <div className={`absolute top-full left-0 w-full min-h-[380px] bg-white border-b border-[#010526]/10 shadow-2xl py-10 px-6 md:px-16 z-50 transition-all duration-300 ease-out grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 max-w-full text-left ${animate ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}>
 
         {/* Left Column: Menu Links */}
         <div className="md:col-span-4 flex flex-col justify-start">

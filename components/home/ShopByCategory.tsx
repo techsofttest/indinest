@@ -13,7 +13,7 @@ const categories = [
 
 export default function ShopByCategory() {
   return (
-    <section className="py-16 px-4 md:px-8 max-w-[1600px] mx-auto bg-white">
+    <section className="py-12 md:py-16 px-4 md:px-8 max-w-[1600px] mx-auto bg-white">
       {/* Section Header */}
       <div className="text-center mb-12">
         <p className="text-[10px] uppercase tracking-[0.2em] mb-2 text-[#010526]/60">Curated Collections</p>
