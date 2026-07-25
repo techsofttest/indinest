@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { Loader2, Check, ShoppingBag } from "lucide-react";
+
 interface ProductCardProps {
   imageSrc: string;
   imageAlt: string;
@@ -21,26 +26,117 @@ export default function ProductCard({
   originalPrice,
   sizes = ["S", "M", "L", "XL", "XXL"],
 }: ProductCardProps) {
+  const [addingState, setAddingState] = useState<"idle" | "loading" | "success">("idle");
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (addingState !== "idle") return;
+
+    setAddingState("loading");
+
+    // Simulate network delay and add item to cart
+    setTimeout(() => {
+      setAddingState("success");
+
+      // 1. Get current cart items
+      const stored = localStorage.getItem("cartItems");
+      const currentCart = stored ? JSON.parse(stored) : [
+        {
+          id: 1,
+          name: "Heritage Ivory Sherwani",
+          brand: "Royal Crafts",
+          price: 32000,
+          image: "/products/men/sherwani/sherwani1/sherwani1.jpg",
+          size: "M",
+          sizes: ["S", "M", "L", "XL"],
+          colour: "Ivory",
+          quantity: 1,
+          isOutOfStock: false,
+        },
+        {
+          id: 2,
+          name: "Banarasi Silk Saree",
+          brand: "IndiNest Heritage",
+          price: 24500,
+          image: "/products/product-clt/Saree-red.png",
+          size: "Free Size",
+          sizes: ["Free Size"],
+          colour: "Crimson Red",
+          quantity: 1,
+          isOutOfStock: true,
+        },
+      ];
+
+      // 2. Parse price to integer
+      const numericPrice = Number(price.replace(/[^0-9]/g, "")) || 15000;
+
+      // 3. Check if exists
+      const productName = name || imageAlt || "Premium Product";
+      const existsIndex = currentCart.findIndex((item: any) => item.name === productName);
+      
+      if (existsIndex > -1) {
+        currentCart[existsIndex].quantity += 1;
+      } else {
+        currentCart.push({
+          id: Date.now(),
+          name: productName,
+          brand: brand,
+          price: numericPrice,
+          image: imageSrc,
+          size: sizes[0] || "M",
+          sizes: sizes,
+          colour: "Original",
+          quantity: 1,
+        });
+      }
+
+      // 4. Save and trigger sync
+      localStorage.setItem("cartItems", JSON.stringify(currentCart));
+      const totalCount = currentCart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+      localStorage.setItem("cartItemCount", String(totalCount));
+      
+      window.dispatchEvent(new Event("cart-change"));
+
+      // 5. Open Cart Drawer after success state finishes showing (0.8s later)
+      setTimeout(() => {
+        setAddingState("idle");
+        window.dispatchEvent(new Event("cart-open-drawer"));
+      }, 800);
+
+    }, 1200);
+  };
+
   return (
     <div className={`${className} group cursor-pointer`}>
       <div className={`w-full aspect-[2/3] group-hover:aspect-[2/2.6] transition-all duration-500 ${bgColor} mb-3 relative overflow-hidden`}>
-        {/* Add to Cart button - visible on hover */}
+        {/* Add to Cart button */}
         <button
-          className="absolute top-3 right-3 p-2.5 rounded-full bg-white/90 text-[#010526] z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md hover:bg-white hover:scale-105"
+          onClick={handleAddToCart}
+          className={`absolute top-3 right-3 p-2.5 rounded-full bg-white/90 text-[#010526] z-10 transition-all duration-300 shadow-md hover:bg-white hover:scale-105 cursor-pointer ${
+            addingState !== "idle" ? "opacity-100 scale-110" : "opacity-0 group-hover:opacity-100"
+          }`}
           aria-label="Add to cart"
+          disabled={addingState !== "idle"}
         >
-          <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <path d="M16 10a4 4 0 0 1-8 0" />
-          </svg>
+          {addingState === "loading" && (
+            <Loader2 size={16} className="animate-spin text-[#010526]" />
+          )}
+          {addingState === "success" && (
+            <Check size={16} className="text-emerald-600 animate-fade-in" />
+          )}
+          {addingState === "idle" && (
+            <ShoppingBag size={16} className="text-[#010526]" />
+          )}
         </button>
+
         <img
           src={imageSrc}
           alt={imageAlt}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       </div>
+
       {name ? (
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#010526]/70 mb-1">{brand}</p>

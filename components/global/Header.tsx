@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import SearchModal from "./SearchModal";
 import MenuDropdown from "./MenuDropdown";
+import LoginModal from "./LoginModal";
+import CartDrawer from "./CartDrawer";
+import { User, ShoppingBag, LogOut } from "lucide-react";
 
 // Left-side nav links
 export const leftLinks = [
@@ -56,16 +59,81 @@ export const keralaTraditionalItems = [
   { label: "Dhavani Set", href: "#" },
 ];
 
+const getInitials = (name: string): string => {
+  if (!name) return "?";
+  const parts = name.split(" ").filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+
 export default function Header() {
   const pathname = usePathname();
   const [revealed, setRevealed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [cartCount, setCartCount] = useState(2);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenDrawer = () => setCartDrawerOpen(true);
+    window.addEventListener("cart-open-drawer", handleOpenDrawer);
+    return () => window.removeEventListener("cart-open-drawer", handleOpenDrawer);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setRevealed(true), 50);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+      setUserName(localStorage.getItem("userName") || "");
+      setUserEmail(localStorage.getItem("userEmail") || "");
+    };
+    checkAuth();
+    window.addEventListener("auth-change", checkAuth);
+    window.addEventListener("storage", checkAuth);
+    return () => {
+      window.removeEventListener("auth-change", checkAuth);
+      window.removeEventListener("storage", checkAuth);
+    };
+  }, []);
+
+  useEffect(() => {
+    const checkCart = () => {
+      const stored = localStorage.getItem("cartItemCount");
+      if (stored !== null) {
+        setCartCount(Number(stored));
+      } else {
+        localStorage.setItem("cartItemCount", "2");
+        setCartCount(2);
+      }
+    };
+    checkCart();
+    window.addEventListener("cart-change", checkCart);
+    window.addEventListener("storage", checkCart);
+    return () => {
+      window.removeEventListener("cart-change", checkCart);
+      window.removeEventListener("storage", checkCart);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
+    setIsLoggedIn(false);
+    setUserName("");
+    setUserEmail("");
+    window.dispatchEvent(new Event("auth-change"));
+  };
 
   return (
     <>
@@ -158,7 +226,7 @@ export default function Header() {
                   height={58}
                   priority
                   className="object-contain"
-                  style={{ maxWidth: "160px", maxHeight: "58px", width: "100%", height: "auto" }}
+                  style={{ maxWidth: "160px", maxHeight: "58px", width: "auto", height: "auto" }}
                 />
               </div>
             </Link>
@@ -174,11 +242,10 @@ export default function Header() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className={`relative transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full text-[#010526] ${
-                      isActive
-                        ? "after:w-full opacity-100"
-                        : "after:w-0 hover:opacity-60"
-                    }`}
+                    className={`relative transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full text-[#010526] ${isActive
+                      ? "after:w-full opacity-100"
+                      : "after:w-0 hover:opacity-60"
+                      }`}
                   >
                     {link.label}
                   </a>
@@ -200,31 +267,100 @@ export default function Header() {
                 </svg>
               </button>
 
-              {/* Account */}
-              <button aria-label="Account" className="hover:opacity-60 transition-opacity">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </button>
+              {/* Account with Hover Dropdown */}
+              <div className="relative group py-2">
+                <button
+                  aria-label="Account"
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      setLoginOpen(true);
+                    }
+                  }}
+                  className="hover:opacity-60 transition-opacity flex items-center h-full cursor-pointer"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </button>
+
+                {/* Dropdown Menu */}
+                <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 py-2.5">
+                  {!isLoggedIn ? (
+                    <div className="px-4 py-2 flex flex-col items-center">
+                      {/* <p className="text-[10px] text-[#010526]/50 uppercase tracking-widest mb-3 text-center font-bold">Access your account</p> */}
+                      <button
+                        onClick={() => setLoginOpen(true)}
+                        className="w-full py-2 bg-[#010526] text-white text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-opacity text-center cursor-pointer"
+                      >
+                        Login / Sign Up
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col py-1">
+                      {/* User Info Header */}
+                      <div className="px-5 py-2.5 mb-1.5 flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-[#010526] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                          {getInitials(userName)}
+                        </div>
+                        <div className="flex flex-col min-w-0 -mt-0.5">
+                          <p className="text-sm font-bold text-[#010526] truncate tracking-wide uppercase">{userName}</p>
+                          <p className="text-[11px] text-[#010526]/70 truncate tracking-wider mt-0.5">{userEmail}</p>
+                        </div>
+                      </div>
+
+                      <Link
+                        href="/profile"
+                        className="px-5 py-3 text-sm text-[#010526] hover:bg-[#010526]/5 transition-colors uppercase tracking-widest font-semibold flex items-center gap-2.5"
+                      >
+                        <User size={16} className="opacity-75" />
+                        Profile
+                      </Link>
+                      <Link
+                        href="/orders"
+                        className="px-5 py-3 text-sm text-[#010526] hover:bg-[#010526]/5 transition-colors uppercase tracking-widest font-semibold flex items-center gap-2.5"
+                      >
+                        <ShoppingBag size={16} className="opacity-75" />
+                        Order History
+                      </Link>
+                      <hr className="border-[#010526]/10 my-1" />
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-5 py-2.5 text-sm text-red-600 hover:bg-[#010526]/5 transition-colors uppercase tracking-widest font-semibold flex items-center gap-2.5 cursor-pointer"
+                      >
+                        <LogOut size={16} />
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
 
               {/* Cart */}
-              <button aria-label="Cart" className="relative hover:opacity-60 transition-opacity">
+              <button 
+                onClick={() => setCartDrawerOpen(true)}
+                aria-label="Cart" 
+                className="relative hover:opacity-60 transition-opacity flex items-center cursor-pointer"
+              >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
                 {/* Cart badge */}
-                <span className="absolute -top-1.5 -right-1.5 bg-[#010526] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none">
-                  0
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#010526] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none">
+                    {cartCount}
+                  </span>
+                )}
               </button>
             </div>
           </div>
         </div>
         <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
         <MenuDropdown isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+        <CartDrawer isOpen={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)} />
       </header >
     </>
   );

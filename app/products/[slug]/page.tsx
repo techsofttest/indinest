@@ -471,6 +471,17 @@ export default function CategoryGenderPage({ params }: PageProps) {
           <OfferBanner slides={bannerSlides} variant="listing-top" />
         )}
 
+        {/* Collection Promo Banner */}
+        {isCollectionPage && (
+          <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 pt-1 pb-4">
+            <div className="bg-[#F0F2FF]/60 py-5 px-6 border border-[#010526]/5 text-center">
+              <span className="text-sm md:text-base font-light tracking-[0.15em] text-[#010526] uppercase">
+                Explore our handpicked curation of {pageTitle.toLowerCase()} and seasonal highlights
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Category Cards Carousel */}
         {categories && categories.length > 0 && (
           <div className="max-w-[1600px] mx-auto px-4 md:px-8 pt-2 pb-2">
@@ -539,10 +550,10 @@ export default function CategoryGenderPage({ params }: PageProps) {
         )}
 
         {/* Divider */}
-        <div className="border-t border-[#010526]/10 max-w-[1600px] mx-auto" />
+        {/* <div className="border-t border-[#010526]/10 max-w-[1600px] mx-auto" /> */}
 
         {/* Main Layout: Filter + Grid */}
-        <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-12 md:py-16 flex gap-10 md:gap-14 items-start">
+        <div className="max-w-[1600px] mx-auto px-4 md:px-8 pb-12 md:pb-16 pt-6 md:pt-8 flex gap-10 md:gap-14 items-start">
           {/* Desktop Filters */}
           <div className="hidden md:block w-60 flex-none sticky top-[88px] overflow-y-auto max-h-[calc(100vh-120px)] pr-2 no-scrollbar">
             <FilterPanel

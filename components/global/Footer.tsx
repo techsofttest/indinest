@@ -214,7 +214,7 @@ export default function Footer() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-sm">
         <div className="flex flex-col gap-3">
           <h5 className="font-bold uppercase tracking-widest text-[10px] mb-2">Customer Service</h5>
-          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Contact Us</a>
+          <a href="/contact" className="text-[#010526]/70 hover:text-[#010526]">Contact Us</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Gift Card &amp; Store Credit</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Payment</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Shipping</a>
