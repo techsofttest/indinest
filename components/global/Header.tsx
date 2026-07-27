@@ -23,7 +23,7 @@ export const rightLinks = [
   { label: "Women", href: "/products/women" },
   { label: "Kids", href: "#" },
   { label: "Best Sellers", href: "/products/best-sellers" },
-  { label: "Blog", href: "#" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const categories = [
@@ -337,9 +337,9 @@ export default function Header() {
               </div>
 
               {/* Cart */}
-              <button 
+              <button
                 onClick={() => setCartDrawerOpen(true)}
-                aria-label="Cart" 
+                aria-label="Cart"
                 className="relative hover:opacity-60 transition-opacity flex items-center cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

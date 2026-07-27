@@ -222,7 +222,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col gap-3">
           <h5 className="font-bold uppercase tracking-widest text-[10px] mb-2">About Us</h5>
-          <a href="#" className="text-[#010526]/70 hover:text-[#010526]">The IndiNest App</a>
+          <a href="/about" className="text-[#010526]/70 hover:text-[#010526]">Our Story</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Sustainability</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Press &amp; Events</a>
           <a href="#" className="text-[#010526]/70 hover:text-[#010526]">Careers</a>

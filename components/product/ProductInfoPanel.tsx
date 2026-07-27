@@ -22,6 +22,7 @@ interface ProductInfoPanelProps {
   setSelectedSize: (size: string) => void;
   isAddedToBag: boolean;
   onAddToBag: () => void;
+  onBuyNow: () => void;
   onOpenSizeGuide: () => void;
   onUnavailableSize: (size: string) => void;
   openAccordions: Record<string, boolean>;
@@ -37,12 +38,15 @@ export default function ProductInfoPanel({
   setSelectedSize,
   isAddedToBag,
   onAddToBag,
+  onBuyNow,
   onOpenSizeGuide,
   onUnavailableSize,
   openAccordions,
   toggleAccordion,
   actionButtonsRef,
 }: ProductInfoPanelProps) {
+  const isAvailable = product.availability === "In Stock";
+
   return (
     <div className="lg:col-span-5 flex flex-col justify-start">
       {/* Brand / Category */}
@@ -90,7 +94,7 @@ export default function ProductInfoPanel({
         <div className="flex flex-wrap gap-3">
           {sizeOptions.map((size) => {
             const isStandardSize = ["S", "M", "L", "XL", "XXL"].includes(size);
-            
+
             if (!isStandardSize) {
               return (
                 <div
@@ -177,13 +181,16 @@ export default function ProductInfoPanel({
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              Add to Bag
-            </>
-          )}
-        </button>
-        <button className="flex-1 py-4 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2.5">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          </svg>
+          Add to Bag
+        </>
+      )}
+    </button>
+    <button 
+      onClick={onBuyNow}
+      className="flex-1 py-4 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2.5"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
           </svg>
           Buy Now
@@ -312,8 +319,8 @@ export default function ProductInfoPanel({
           isOpen={openAccordions.shippingReturns}
           toggle={() => toggleAccordion("shippingReturns")}
         >
-          Free shipping across India. Standard shipping takes 5–7 business days. Easy returns and
-          exchanges within 5 days of delivery.
+          Standard shipping takes 5–7 business days across our delivery regions. Easy returns and
+          exchanges are available within 5 days of delivery for eligible items.
         </AccordionItem>
 
         <AccordionItem

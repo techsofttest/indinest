@@ -7,6 +7,7 @@ interface StickyCartBarProps {
   productImage: string;
   isAddedToBag: boolean;
   onAddToBag: () => void;
+  onBuyNow: () => void;
   onClose: () => void;
 }
 
@@ -17,8 +18,10 @@ export default function StickyCartBar({
   productImage,
   isAddedToBag,
   onAddToBag,
+  onBuyNow,
   onClose,
 }: StickyCartBarProps) {
+
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-[#010526]/10 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-40 transition-transform duration-300 ease-out ${
@@ -73,7 +76,10 @@ export default function StickyCartBar({
             )}
           </button>
 
-          <button className="flex-1 py-3.5 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+          <button 
+            onClick={onBuyNow}
+            className="w-full sm:flex-1 py-3.5 bg-[#010526] text-white text-xs md:text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+          >
             <svg
               width="14"
               height="14"

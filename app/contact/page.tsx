@@ -5,6 +5,9 @@ import Image from "next/image";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ArrowRight } from "lucide-react";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
+import PageBanner from "@/components/common/PageBanner";
+import { PhoneInput, defaultCountries } from "react-international-phone";
+import "react-international-phone/style.css";
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -30,24 +33,12 @@ export default function ContactPage() {
       <Header />
 
       <main className="flex-1 w-full max-w-[1100px] mx-auto px-4 md:px-8 py-10 flex flex-col gap-16">
-        {/* Banner with bg image */}
-        <div className="relative w-full h-48 md:h-64 bg-[#010526]/10 overflow-hidden rounded-sm shadow-sm">
-          <Image
-            src="/banner/b4.jpg"
-            alt="Contact Us Banner"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-[#010526]/40 backdrop-blur-[1px] flex items-center justify-center">
-            <div className="text-center text-white px-4">
-              <span className="text-[10px] tracking-[0.25em] uppercase font-sans font-bold">IndiNest Maison</span>
-              <h1 className="text-3xl md:text-5xl uppercase tracking-widest font-light mt-1 drop-shadow-sm">
-                Get In Touch
-              </h1>
-            </div>
-          </div>
-        </div>
+        <PageBanner
+          imageUrl="/banner/b4.jpg"
+          imageAlt="Contact Us Banner"
+          subtitle="IndiNest Maison"
+          title="Get In Touch"
+        />
 
         {/* Section 1: Contact Details */}
         <div className="flex flex-col gap-8">
@@ -62,7 +53,7 @@ export default function ContactPage() {
             {/* Image to Left */}
             <div className="w-full md:w-[45%] relative aspect-[4/3] bg-[#010526]/5 overflow-hidden shadow-md rounded-sm">
               <Image
-                src="/boutique_showroom.png"
+                src="/banner/boutique_showroom.png"
                 alt="Flagship Boutique Room"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -187,7 +178,7 @@ export default function ContactPage() {
                       placeholder="e.g. Priya Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/20 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors"
+                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/40 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors"
                     />
                   </div>
 
@@ -202,7 +193,7 @@ export default function ContactPage() {
                         placeholder="e.g. priya@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-white border border-[#010526]/20 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors"
+                        className="w-full px-4 py-2.5 bg-white border border-[#010526]/40 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors"
                       />
                     </div>
 
@@ -210,12 +201,14 @@ export default function ContactPage() {
                       <label className="text-[10px] uppercase tracking-widest font-bold text-[#010526]/60">
                         Phone Number
                       </label>
-                      <input
-                        type="tel"
-                        placeholder="e.g. +91 98765 43210"
+                      <PhoneInput
+                        defaultCountry="gb"
+                        countries={defaultCountries.filter((c) => ["gb", "ie", "de"].includes(c[1]))}
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-white border border-[#010526]/20 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors"
+                        onChange={(phone) => setFormData({ ...formData, phone })}
+                        style={{ '--react-international-phone-border-radius': '0' } as React.CSSProperties}
+                        inputClassName="w-full !bg-transparent !border-l-0 !text-xs !font-sans !text-[#010526] focus:!outline-none !rounded-none"
+                        className="[&.react-international-phone-input-container]:border [&.react-international-phone-input-container]:border-[#010526]/40 focus-within:[&.react-international-phone-input-container]:border-[#010526] [&.react-international-phone-input-container]:rounded-none bg-white"
                       />
                     </div>
                   </div>
@@ -227,7 +220,7 @@ export default function ContactPage() {
                     <select
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/20 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors cursor-pointer"
+                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/40 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors cursor-pointer"
                     >
                       <option value="General Inquiry">General Product Inquiry</option>
                       <option value="Custom Consultation">Custom Fitting & Tailoring</option>
@@ -247,7 +240,7 @@ export default function ContactPage() {
                       placeholder="Specify designs or requirements..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/20 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors resize-none"
+                      className="w-full px-4 py-2.5 bg-white border border-[#010526]/40 text-xs outline-none text-[#010526] focus:border-[#010526] transition-colors resize-none"
                     />
                   </div>
 

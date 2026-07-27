@@ -2,6 +2,7 @@
 
 import { use, useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
 import HeritageCarousel from "@/components/home/ProductCarousel";
@@ -21,6 +22,7 @@ export default function ProductDetailPage({
 }) {
   const { slug, id } = use(params);
   const productId = parseInt(id, 10);
+  const router = useRouter();
   const allProducts = [...menProducts, ...womenProducts];
   const product = allProducts.find((p) => p.id === productId);
 
@@ -47,6 +49,23 @@ export default function ProductDetailPage({
   const handleAddToBag = () => {
     setIsAddedToBag(true);
     setTimeout(() => setIsAddedToBag(false), 3000);
+  };
+
+  const handleBuyNow = () => {
+    if (!product) return;
+    const numericPrice = parsePrice(product.price) || 0;
+    const buyNowItem = {
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      price: numericPrice,
+      image: product.image,
+      size: selectedSize || (product as any).sizes?.[0] || "One Size",
+      colour: product.colour || "Standard",
+      quantity: 1,
+    };
+    localStorage.setItem("directCheckoutItem", JSON.stringify([buyNowItem]));
+    router.push('/checkout?direct=true');
   };
 
   // Reset state when navigating between products
@@ -181,6 +200,7 @@ export default function ProductDetailPage({
             setSelectedSize={setSelectedSize}
             isAddedToBag={isAddedToBag}
             onAddToBag={handleAddToBag}
+            onBuyNow={handleBuyNow}
             onOpenSizeGuide={() => setIsSizeGuideOpen(true)}
             onUnavailableSize={setUnavailableSizeForModal}
             openAccordions={openAccordions}
@@ -220,12 +240,13 @@ export default function ProductDetailPage({
       </div>
 
       <StickyCartBar
-        isVisible={isStickyBarVisible} // The border is inside this component
+        isVisible={isStickyBarVisible}
         productName={product.name}
         productPrice={product.price}
         productImage={product.image}
         isAddedToBag={isAddedToBag}
         onAddToBag={handleAddToBag}
+        onBuyNow={handleBuyNow}
         onClose={() => setIsStickyBarVisible(false)}
       />
     </>

@@ -392,13 +392,13 @@ export default function CartPage() {
 
               {/* Secure Checkout and Details */}
               <div className="flex flex-col gap-4 mt-4">
-                <button
-                  onClick={() => alert("Proceeding to checkout integration...")}
+                <Link
+                  href="/checkout"
                   className="w-full py-4 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#010526]/10"
                 >
                   <span>Secure Checkout</span>
                   <ArrowRight size={14} />
-                </button>
+                </Link>
 
                 <div className="flex items-start gap-2 text-xs text-[#010526]/50 font-sans mt-2">
                   <ShieldCheck size={16} className="text-[#010526]/60 flex-shrink-0" />
