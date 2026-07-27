@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
@@ -10,7 +10,8 @@ import OrdersTab from "@/components/profile/OrdersTab";
 import PersonalDetailsTab from "@/components/profile/PersonalDetailsTab";
 import AddressesTab from "@/components/profile/AddressesTab";
 
-export default function ProfilePage() {
+// 1. Extract the main logic into a child component
+function ProfileContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -92,5 +93,24 @@ export default function ProfilePage() {
 
             <Footer />
         </div>
+    );
+}
+
+// 2. Wrap the child component in a Suspense boundary in the default export
+export default function ProfilePage() {
+    return (
+        <Suspense 
+            fallback={
+                <div className="min-h-screen w-full flex flex-col bg-white">
+                    <Header />
+                    <div className="flex-1 flex items-center justify-center text-xs uppercase tracking-widest text-[#010526]/60">
+                        Loading Profile...
+                    </div>
+                    <Footer />
+                </div>
+            }
+        >
+            <ProfileContent />
+        </Suspense>
     );
 }

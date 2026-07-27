@@ -19,6 +19,7 @@ export interface Product {
   demand?: number;
   isBestSeller?: boolean;
   isNewArrival?: boolean;
+  availability?: string;
 }
 
 export const menCategories = [
