@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
 import HeritageCarousel from "@/components/home/ProductCarousel";
-import { menProducts, womenProducts, parsePrice } from "@/components/data/products";
+import { menProducts, womenProducts, giftProducts, parsePrice } from "@/components/data/products";
 
 import ProductBreadcrumbs from "@/components/product/ProductBreadcrumbs";
 import ProductImageGallery from "@/components/product/ProductImageGallery";
@@ -23,7 +23,7 @@ export default function ProductDetailPage({
   const { slug, id } = use(params);
   const productId = parseInt(id, 10);
   const router = useRouter();
-  const allProducts = [...menProducts, ...womenProducts];
+  const allProducts = [...menProducts, ...womenProducts, ...giftProducts];
   const product = allProducts.find((p) => p.id === productId);
 
   // ── State ────────────────────────────────────────────────────────────────

@@ -64,7 +64,7 @@ export default function ContactPage() {
             <div className="w-full md:w-[55%] flex flex-col gap-6 font-sans">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Mumbai */}
-                <div className="flex items-start gap-3">
+                {/* <div className="flex items-start gap-3">
                   <MapPin className="text-[#010526]/75 mt-0.5 flex-shrink-0" size={18} />
                   <div>
                     <h3 className="font-serif font-bold text-sm text-[#010526] uppercase tracking-wider">
@@ -74,17 +74,17 @@ export default function ContactPage() {
                       18 Colaba Causeway, Colaba, Mumbai, Maharashtra 400001
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 {/* London */}
                 <div className="flex items-start gap-3">
                   <MapPin className="text-[#010526]/75 mt-0.5 flex-shrink-0" size={18} />
                   <div>
                     <h3 className="font-serif font-bold text-sm text-[#010526] uppercase tracking-wider">
-                      Private Salon - London
+                      Business address
                     </h3>
                     <p className="text-xs text-[#010526]/65 mt-1 leading-relaxed">
-                      42 Bond Street, Mayfair, London W1S 2AA
+                      Flat No: 22, 245 Hanworth Road Hounslow, London
                     </p>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                   <div>
                     <p className="text-[10px] text-[#010526]/50 uppercase tracking-widest">Phone & WhatsApp</p>
                     <p className="text-xs text-[#010526] font-semibold mt-0.5">
-                      +91 22 2202 1947 &nbsp;|&nbsp; +44 20 7946 0958
+                      +447570686563 &nbsp;|&nbsp; +447867214822
                     </p>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function ContactPage() {
                   <div>
                     <p className="text-[10px] text-[#010526]/50 uppercase tracking-widest">Email Enquiries</p>
                     <p className="text-xs text-[#010526] font-semibold mt-0.5">
-                      concierge@indinest.com
+                      indinestuk@gmail.com
                     </p>
                   </div>
                 </div>
@@ -117,10 +117,10 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <Clock className="text-[#010526]/75 mt-0.5 flex-shrink-0" size={18} />
                 <div>
-                  <p className="text-[10px] text-[#010526]/50 uppercase tracking-widest">Salon Hours</p>
+                  <p className="text-[10px] text-[#010526]/50 uppercase tracking-widest">Business Hours</p>
                   <p className="text-xs text-[#010526]/70 mt-0.5">
-                    Monday – Saturday: 11:00 AM – 8:00 PM <br />
-                    Sunday: By Private Appointment Only
+                    Monday-Friday 10.00 AM-6.00 PM <br />
+                    Saturday & Sunday 11.00 AM - 6.00 PM
                   </p>
                 </div>
               </div>
