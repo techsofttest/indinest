@@ -19,6 +19,7 @@ import {
   menProducts,
   womenCategories,
   womenProducts,
+  giftProducts,
   filterConfig,
   collectionFilterConfig,
 } from "@/components/data/products";
@@ -416,6 +417,14 @@ export default function CategoryGenderPage({ params }: PageProps) {
       ...menProducts.filter((p) => p.isNewArrival).map((p) => ({ ...p, gender: "men" })),
       ...womenProducts.filter((p) => p.isNewArrival).map((p) => ({ ...p, gender: "women" })),
     ];
+    bannerSlides = [];
+    editorialItems = [];
+    lookbookSlides = [];
+    isCollectionPage = true;
+  } else if (slug === "gifts") {
+    pageTitle = "Gifts";
+    categories = [];
+    products = giftProducts.map((p) => ({ ...p, gender: "gifts" }));
     bannerSlides = [];
     editorialItems = [];
     lookbookSlides = [];

@@ -109,7 +109,7 @@ export default function ProductCard({
 
   return (
     <div className={`${className} group cursor-pointer`}>
-      <div className={`w-full aspect-[2/3] group-hover:aspect-[2/2.6] transition-all duration-500 ${bgColor} mb-3 relative overflow-hidden`}>
+      <div className={`w-full aspect-[4/5] group-hover:aspect-[4/4.6] transition-all duration-500 ${bgColor} mb-3 relative overflow-hidden`}>
         {/* Add to Cart button */}
         <button
           onClick={handleAddToCart}

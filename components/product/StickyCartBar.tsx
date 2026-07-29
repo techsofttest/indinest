@@ -24,9 +24,8 @@ export default function StickyCartBar({
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-[#010526]/10 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-40 transition-transform duration-300 ease-out ${
-        isVisible ? "translate-y-0" : "translate-y-full"
-      }`}
+      className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-[#010526]/10 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-40 transition-transform duration-300 ease-out ${isVisible ? "translate-y-0" : "translate-y-full"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-16 py-5 flex items-center justify-between gap-6">
         {/* Product Info (desktop only) */}
@@ -46,11 +45,10 @@ export default function StickyCartBar({
         <div className="flex-1 flex items-center gap-3 max-w-md">
           <button
             onClick={onAddToBag}
-            className={`flex-1 py-3.5 border-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${
-              isAddedToBag
+            className={`flex-1 py-3.5 border-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${isAddedToBag
                 ? "bg-emerald-600 border-emerald-600 text-white"
                 : "border-[#010526] hover:bg-[#010526] hover:text-white text-[#010526]"
-            }`}
+              }`}
           >
             {isAddedToBag ? (
               "✓ Added"
@@ -76,7 +74,7 @@ export default function StickyCartBar({
             )}
           </button>
 
-          <button 
+          <button
             onClick={onBuyNow}
             className="w-full sm:flex-1 py-3.5 bg-[#010526] text-white text-xs md:text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
           >

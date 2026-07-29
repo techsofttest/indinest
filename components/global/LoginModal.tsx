@@ -147,7 +147,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               alt="IndiNest"
               width={140}
               height={50}
-              className="object-contain"
+              className="object-contain w-auto h-auto"
               style={{ width: "auto", height: "auto" }}
             />
           </div>

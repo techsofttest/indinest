@@ -48,7 +48,7 @@ export default function ProductInfoPanel({
   const isAvailable = product.availability === "In Stock";
 
   return (
-    <div className="lg:col-span-5 flex flex-col justify-start">
+    <div className="lg:col-span-7 flex flex-col justify-start lg:pr-20">
       {/* Brand / Category */}
       <p className="text-xs md:text-xs font-bold uppercase tracking-[0.25em] text-[#010526]/70 mb-2">
         {product.brand} • {product.category}
@@ -168,7 +168,7 @@ export default function ProductInfoPanel({
       <div ref={actionButtonsRef} className="flex flex-col sm:flex-row gap-3 mb-8">
         <button
           onClick={onAddToBag}
-          className={`flex-1 py-4 border-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2.5 ${isAddedToBag
+          className={`group px-8 py-4 border-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2.5 ${isAddedToBag
             ? "bg-emerald-600 border-emerald-600 text-white"
             : "border-[#010526] hover:bg-[#010526] hover:text-white text-[#010526]"
             }`}
@@ -177,20 +177,20 @@ export default function ProductInfoPanel({
             "✓ Added to Bag"
           ) : (
             <>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="animate-breathe transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-6 group-hover:animate-none">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
-          </svg>
-          Add to Bag
-        </>
-      )}
-    </button>
-    <button 
-      onClick={onBuyNow}
-      className="flex-1 py-4 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2.5"
-    >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              </svg>
+              Add to Bag
+            </>
+          )}
+        </button>
+        <button
+          onClick={onBuyNow}
+          className="group px-8 py-4 bg-[#010526] text-white text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2.5"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-breathe transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-105 group-hover:animate-none">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
           </svg>
           Buy Now

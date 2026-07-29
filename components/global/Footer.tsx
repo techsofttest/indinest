@@ -188,7 +188,7 @@ export default function Footer() {
             alt="IndiNest Logo"
             width={280}
             height={185}
-            className="object-contain"
+            className="object-contain w-auto h-auto"
             style={{ width: "auto", height: "auto" }}
           />
         </div>

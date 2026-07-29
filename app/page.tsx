@@ -8,7 +8,6 @@ import EditorialGrid from "@/components/home/EditorialGrid";
 import LookbookSlider from "@/components/home/LookbookSlider";
 import FeaturedSareeShowcase from "@/components/home/FeaturedSareeShowcase";
 import OfferBanner from "@/components/home/OfferBanner";
-import GiftSection from "@/components/home/GiftSection";
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
         <EditorialGrid />
         <OfferBanner />
         <LookbookSlider />
-        <GiftSection />
       </main>
 
       <Footer />

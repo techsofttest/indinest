@@ -15,6 +15,7 @@ export const leftLinks = [
   { label: "Shop", href: "#" },
   { label: "New Arrival", href: "/products/new-arrivals" },
   { label: "Kerala Traditional", href: "#" },
+  { label: "Gifts", href: "/products/gifts" },
 ];
 
 // Right-side nav links
@@ -165,6 +166,19 @@ export default function Header() {
             {/* Left nav links — hidden on mobile */}
             <nav className="hidden md:flex items-center gap-7 text-[11px] font-semibold uppercase tracking-widest">
               {leftLinks.map((link) => {
+                if (link.label === "Gifts") {
+                  const isActive = pathname.startsWith(link.href);
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className={`relative flex items-center gap-1.5 transition-opacity after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:bg-[#010526] after:transition-all after:duration-300 hover:after:w-full text-[#010526] ${isActive ? "after:w-full opacity-100" : "after:w-0 hover:opacity-60"}`}
+                    >
+                      <img src="/icons/gift.gif" alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                      {link.label}
+                    </a>
+                  );
+                }
                 if (link.label === "Kerala Traditional") {
                   return (
                     <div key={link.label} className="relative group py-2">
@@ -225,7 +239,7 @@ export default function Header() {
                   width={160}
                   height={58}
                   priority
-                  className="object-contain"
+                  className="object-contain w-auto h-auto"
                   style={{ maxWidth: "160px", maxHeight: "58px", width: "auto", height: "auto" }}
                 />
               </div>

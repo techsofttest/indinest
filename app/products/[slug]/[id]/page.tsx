@@ -184,7 +184,7 @@ export default function ProductDetailPage({
           productName={product.name}
         />
 
-        <div className="px-6 md:px-8 pt-2 pb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+        <div className="px-6 md:px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 lg:items-start">
           <ProductImageGallery
             images={images}
             productName={product.name}
@@ -211,7 +211,7 @@ export default function ProductDetailPage({
 
         {/* Similar Products */}
         {similarCarouselProducts.length > 0 && (
-          <div className="">
+          <div className="mt-8 mb-16">
             <HeritageCarousel
               products={similarCarouselProducts}
               title="Similar Products"
