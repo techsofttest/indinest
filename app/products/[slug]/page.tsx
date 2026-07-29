@@ -485,7 +485,9 @@ export default function CategoryGenderPage({ params }: PageProps) {
           <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 pt-1 pb-4">
             <div className="bg-[#F0F2FF]/60 py-5 px-6 border border-[#010526]/5 text-center">
               <span className="text-sm md:text-base font-light tracking-[0.15em] text-[#010526] uppercase">
-                Explore our handpicked curation of {pageTitle.toLowerCase()} and seasonal highlights
+                {slug === "gifts" 
+                  ? "Explore our handpicked curation of kerala gifts and accessories" 
+                  : `Explore our handpicked curation of ${pageTitle.toLowerCase()} and seasonal highlights`}
               </span>
             </div>
           </div>
